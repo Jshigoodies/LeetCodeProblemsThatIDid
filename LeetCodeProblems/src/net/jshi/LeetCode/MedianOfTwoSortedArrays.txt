@@ -1,0 +1,30 @@
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int n = nums1.length;
+        int m = nums2.length;
+
+        int[] merged = new int[n + m];
+
+        int index = 0;
+
+        for(int i = 0; i < n; i++) {
+            merged[index] = nums1[i];
+            index++;
+        }
+
+        for(int i = 0; i < m; i++) {
+            merged[index] = nums2[i];
+            index++;
+        }
+
+        Arrays.sort(merged);
+
+        if(merged.length % 2 == 1) {
+            //odd number of elements
+            return merged[(n+m-1)/2];
+        }
+        else {
+            return (merged[(n+m)/2] + merged[(n+m - 1)/2])  /2.0;
+        }
+    }
+}

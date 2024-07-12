@@ -1,0 +1,33 @@
+class Solution {
+    public int reverse(int x) {
+
+        String strNum = Integer.toString(x);
+        String reverse = "";
+        boolean isNegative = false;
+
+        if(strNum.contains("-")) {
+            strNum = strNum.substring(1);
+            isNegative = true;
+        }
+
+        for(int i = 0; i < strNum.length(); i++) {
+            reverse = strNum.charAt(i) + reverse;
+
+        }
+
+        if(isNegative) {
+            reverse = "-" + reverse;
+        }
+
+        int reverseInt;
+        try {
+            reverseInt = Integer.valueOf(reverse);
+        }
+        catch(Exception e) {
+            reverseInt = 0;
+        }
+        
+
+        return reverseInt;
+    }
+}

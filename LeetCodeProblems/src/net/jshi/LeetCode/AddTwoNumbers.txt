@@ -1,0 +1,58 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode start = new ListNode(0); //first node is useless, but this is what i will be returning.
+        ListNode current = start; //just in case i need to carry over the number bigger than or equal to 10
+
+        int carryNum = 0; //store that >= 10 value in a integer variable
+
+        while(l1 != null || l2 != null) { //which ever listnode number is longer will continue this while loop
+            int x; //digit from l1
+
+            if(l1 != null) { //still has digits
+                x = l1.val;
+            }
+            else { //ran out of digits but other one probably didn't
+                x = 0;
+            }
+            
+            int y; //digit from l2
+            if(l2 != null) {
+                y = l2.val;
+            }
+            else {
+                y = 0;
+            }
+
+            int sum = x + y + carryNum; //find digit value
+            carryNum = sum / 10; //carry over the number that is >= 10
+            current.next = new ListNode(sum % 10); //mod so i can only have the first digit in the one's place
+
+            current = current.next; // Move to the next node in summed number
+
+            if (l1 != null) {
+                l1 = l1.next; // Move to the next node in l1
+            }
+            if (l2 != null) {
+                l2 = l2.next; // Move to the next node in l2
+            }
+            
+        }
+
+        if(carryNum > 0) {
+            current.next = new ListNode(carryNum);
+        }
+
+        return start.next;
+
+    }
+}

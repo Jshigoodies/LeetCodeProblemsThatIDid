@@ -1,0 +1,57 @@
+class Solution {
+    public String convert(String s, int numRows) {
+        int direction = 1;
+        int index = 0;
+
+        if(numRows == 1 || numRows >= s.length()) {
+            return s;
+        }
+
+
+        ArrayList<Character>[] rows = new ArrayList[numRows]; //an array of a list of chars 2d array
+
+        for(int i = 0; i < numRows; i++) {
+            rows[i] = new ArrayList<Character>();
+        }
+
+        for(int i = 0; i < s.length(); i++) {
+            rows[index].add(s.charAt(i));
+
+            if(direction == 1)
+            {
+                if(index == (numRows - 1)) {
+                    direction = -1;
+                    index--;
+                }
+                else {
+                    index++;
+                }
+                
+            }
+            else if(direction == -1) {
+                if(index == 0) {
+                    direction = 1;
+                    index++;
+                }
+                else {
+                    index--;
+                }
+            }
+
+        }
+
+        StringBuilder result = new StringBuilder();
+
+        for(int i = 0; i < rows.length; i++) {
+            for(int j = 0; j < rows[i].size(); j++) {
+                result.append(rows[i].get(j));
+            }
+        }
+
+
+
+        
+    return result.toString();
+
+    }
+}
